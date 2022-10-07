@@ -30,6 +30,11 @@ page LoginPage {
   component: import Login from "@ext/LoginPage"
 }
 
+query getAllExpenses {
+  fn: import { getAllExpenses} from "@ext/queries.js",
+  entities: [Expense]
+}
+
 entity User {=psl
     id          Int     @id @default(autoincrement())
     username    String  @unique
