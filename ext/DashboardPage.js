@@ -1,7 +1,11 @@
 import React from 'react'
 
-const DashboardPage = () => {
-    return "Dashboard!"
+const DashboardPage = ({ user }) => {
+    console.log(user)
+    return
+      <div>
+        Hi {user.username}
+      </div>
 }
 
 export default DashboardPage
