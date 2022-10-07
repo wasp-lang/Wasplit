@@ -1,15 +1,16 @@
 app Wasplit {
   title: "Wasplit",
+  head: [
+    "<script src='https://cdn.tailwindcss.com'></script>"
+  ],
   auth: {
     userEntity: User,
     methods: {
       usernameAndPassword: {}
     },
-    onAuthFailedRedirectTo: "/"
-  },
-  head: [
-    "<script src='https://cdn.tailwindcss.com'></script>"
-  ],
+    onAuthFailedRedirectTo: "/",
+    onAuthSucceededRedirectTo: "/dashboard",
+  }
 }
 
 route RootRoute { path: "/", to: LandingPage }
@@ -33,6 +34,11 @@ page LoginPage {
   component: import Login from "@ext/LoginPage"
 }
 
+query getAllMyExpenses {
+  fn: import { getAllMyExpenses } from "@ext/queries.js",
+  entities: [Expense]
+}
+
 entity User {=psl
     id          Int     @id @default(autoincrement())
     username    String  @unique
@@ -53,6 +59,7 @@ entity Currency {=psl
   expenses Expense[]
 psl=}
 
+// TODO: Add field documenting who created an expense!
 entity Expense {=psl
     id         Int     @id @default(autoincrement())
     name       String
