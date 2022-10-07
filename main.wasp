@@ -1,3 +1,31 @@
+app Wasplit {
+  title: "Wasplit",
+  auth: {
+    userEntity: User,
+    methods: {
+      usernameAndPassword: {}
+    },
+    onAuthFailedRedirectTo: "/"
+  }
+}
+
+route RootRoute { path: "/", to: LandingPage }
+page LandingPage {
+  component: import Landing from "@ext/LandingPage.js"
+}
+
+route RootRoute { path: "/dashboard", to: DashboardPage }
+page DashboardPage {
+  component: import Dashboard from "@ext/DashboardPage.js",
+  authRequired: true
+}
+
+entity User {=psl
+    id          Int     @id @default(autoincrement())
+    username    String  @unique
+    password    String
+psl=}
+
 // expense:
 //     id
 //     name
@@ -38,12 +66,3 @@
 //     id
 //     username
 //     password
-
-app Wasplit {
-  title: "Wasplit"
-}
-
-route RootRoute { path: "/", to: MainPage }
-page MainPage {
-  component: import Main from "@ext/MainPage.js"
-}
