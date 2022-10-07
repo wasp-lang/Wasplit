@@ -1,5 +1,46 @@
-app Splitwasp {
-  title: "Splitwasp"
+// expense:
+//     id
+//     name
+//     category: category_id
+//     tags
+//     datetime
+//     group_id
+
+// category
+//     id
+//     name
+
+// group
+//     id
+//     name
+//     group_participants
+
+// expense_participants:
+//     id
+//     expesnse_id
+//     participant_id
+//     payer or spender
+//     amount
+//     currency
+
+// currecy
+//     id
+//     name
+//     symbol
+
+// participant
+//     id
+//     name
+//     email
+//     user: optional user_id
+
+// user
+//     id
+//     username
+//     password
+
+app Wasplit {
+  title: "Wasplit"
 }
 
 route RootRoute { path: "/", to: MainPage }
