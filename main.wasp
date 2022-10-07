@@ -6,7 +6,10 @@ app Wasplit {
       usernameAndPassword: {}
     },
     onAuthFailedRedirectTo: "/"
-  }
+  },
+  head: [
+    "<script src='https://cdn.tailwindcss.com'></script>"
+  ],
 }
 
 route RootRoute { path: "/", to: LandingPage }
