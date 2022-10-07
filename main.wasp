@@ -24,45 +24,65 @@ entity User {=psl
     id          Int     @id @default(autoincrement())
     username    String  @unique
     password    String
+    participant Participant?
 psl=}
 
-// expense:
-//     id
-//     name
-//     category: category_id
-//     tags
-//     datetime
-//     group_id
+entity Category {=psl
+    id       Int @id @default(autoincrement())
+    name     String
+    expenses Expense[]
+psl=}
 
-// category
-//     id
-//     name
+entity Currency {=psl
+  id Int @id @default(autoincrement())
+  name String
+  symbol String
+  expenseParticipants ExpenseParticipant[]
+psl=}
 
-// group
-//     id
-//     name
-//     group_participants
+entity Expense {=psl
+    id         Int     @id @default(autoincrement())
+    name       String
+    date       DateTime @default(now())
+    category   Category @relation(fields: [categoryId], references: [id])
+    categoryId Int
+    expenseParticipants ExpenseParticipant[]
+psl=}
 
-// expense_participants:
-//     id
-//     expesnse_id
-//     participant_id
-//     payer or spender
-//     amount
-//     currency
+entity Group {=psl
+  id         Int     @id @default(autoincrement())
+  name       String
+  groupParticipants GroupParticipant[]
+psl=}
 
-// currecy
-//     id
-//     name
-//     symbol
+entity GroupParticipant {=psl
+  group         Group @relation(fields: [groupId], references: [id])
+  groupId       Int
+  participant   Participant @relation(fields: [participantId], references: [id])
+  participantId Int
 
-// participant
-//     id
-//     name
-//     email
-//     user: optional user_id
+  @@id([groupId, participantId])
+psl=}
 
-// user
-//     id
-//     username
-//     password
+entity ExpenseParticipant {=psl
+  amount        Int
+  expense       Expense @relation(fields: [expenseId], references: [id])
+  expenseId     Int
+  participant   Participant @relation(fields: [participantId], references: [id])
+  participantId Int
+  currency      Currency @relation(fields: [currencyId], references: [id])
+  currencyId    Int
+
+
+  @@id([expenseId, participantId])
+psl=}
+
+entity Participant {=psl
+    id         Int     @id @default(autoincrement())
+    name       String
+    email       String
+    user   User? @relation(fields: [userId], references: [id])
+    userId Int?
+    groupParticipants GroupParticipant[]
+    expenseParticipants ExpenseParticipant[]
+psl=}
