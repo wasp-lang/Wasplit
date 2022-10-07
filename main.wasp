@@ -1,11 +1,15 @@
 app Wasplit {
   title: "Wasplit",
+  head: [
+    "<script src='https://cdn.tailwindcss.com'></script>"
+  ],
   auth: {
     userEntity: User,
     methods: {
       usernameAndPassword: {}
     },
-    onAuthFailedRedirectTo: "/"
+    onAuthFailedRedirectTo: "/",
+    onAuthSucceededRedirectTo: "/dashboard",
   }
 }
 
@@ -55,6 +59,7 @@ entity Currency {=psl
   expenses Expense[]
 psl=}
 
+// TODO: Add field documenting who created an expense!
 entity Expense {=psl
     id         Int     @id @default(autoincrement())
     name       String
