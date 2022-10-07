@@ -47,7 +47,7 @@ entity Currency {=psl
   id Int @id @default(autoincrement())
   name String
   symbol String
-  expenseParticipants ExpenseParticipant[]
+  expenses Expense[]
 psl=}
 
 entity Expense {=psl
@@ -56,6 +56,8 @@ entity Expense {=psl
     date       DateTime @default(now())
     category   Category @relation(fields: [categoryId], references: [id])
     categoryId Int
+    currency      Currency @relation(fields: [currencyId], references: [id])
+    currencyId    Int
     expenseParticipants ExpenseParticipant[]
 psl=}
 
@@ -76,15 +78,13 @@ psl=}
 
 entity ExpenseParticipant {=psl
   amount        Int
+  isSpender     Boolean
   expense       Expense @relation(fields: [expenseId], references: [id])
   expenseId     Int
   participant   Participant @relation(fields: [participantId], references: [id])
   participantId Int
-  currency      Currency @relation(fields: [currencyId], references: [id])
-  currencyId    Int
 
-
-  @@id([expenseId, participantId])
+  @@id([expenseId, participantId, isSpender])
 psl=}
 
 entity Participant {=psl
