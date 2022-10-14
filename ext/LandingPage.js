@@ -4,11 +4,14 @@ import { Link } from "react-router-dom"
 const LandingPage = () => {
     return (
         <div>
-            <nav>
-                <Link to='login' className='mx-2 my-1 p-2 bg-blue-600 text-white'>Log in</Link>
-                <Link to='signup' className='mx-2 my-1 p-2 bg-blue-600 text-white'>Sign up</Link>
+            <nav class="flex flex-row justify-between items-center bg-yellow-100">
+                <span class='text-lg mx-1'>Wasplit</span>
+                <span class="flex">
+                  <Link to='signup' className='mx-2 my-1 p-2 bg-yellow-500 text-white rounded'>Sign up</Link>
+                  <Link to='login' className='mx-2 my-1 p-2 bg-yellow-500 text-white rounded'>Log in</Link>
+                </span>
             </nav>
-            Welcome to Wasplit!
+            Welcome to Wasplit! This is the landing page where you can see what Wasplit is.
         </div>
     )
 }
